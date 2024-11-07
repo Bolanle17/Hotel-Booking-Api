@@ -18,7 +18,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://hotel-booking-frontend-w77y.onrender.com",
   allowedHeaders: ["Content-Type", "Authorization", "auth-token"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true
