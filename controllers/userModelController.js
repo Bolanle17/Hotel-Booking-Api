@@ -13,12 +13,12 @@ exports.register = async (req, res) => {
     console.log("Received password:", password);
   
     if (password !== confirmPassword) {
-      return res.json({ success: false, message: "Passwords do not match" });
+      return res.status(400).json({ success: false, message: "Passwords do not match" });
     }
   
-    if (!validatePassword(password)) {
-      return res.json({ success: false, message: "Invalid password. It must be at least 8 characters long and contain at least one letter and one number." });
-    }
+    // if (!validatePassword(password)) {
+    //   return res.json({ success: false, message: "Invalid password. It must be at least 8 characters long and contain at least one letter and one number." });
+    // }
   
     try {
       let user = await userSchema.findOne({ email });
