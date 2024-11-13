@@ -9,6 +9,8 @@ const validatePassword = (password) => {
 
 exports.register = async (req, res) => {
     const { name, email, password, confirmPassword } = req.body;
+
+    console.log("Received password:", password);
   
     if (password !== confirmPassword) {
       return res.json({ success: false, message: "Passwords do not match" });
