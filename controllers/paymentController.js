@@ -55,7 +55,7 @@ exports.initiatePayment = async (req, res) => {
       tx_ref: savedPayment.paymentReference,
       amount,
       currency: currency || 'NGN',
-      redirect_url: "https://hotel-booking-frontend-seso.onrender.com/thankyou",
+      redirect_url: "https://hotel-booking-frontend-livid.vercel.app/thankyou",
       customer: {
         email,
         phonenumber: phone,

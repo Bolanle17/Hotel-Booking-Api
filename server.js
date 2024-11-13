@@ -18,7 +18,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "https://hotel-booking-frontend-seso.onrender.com",
+  origin: "https://hotel-booking-frontend-livid.vercel.app",
   allowedHeaders: ["Content-Type", "Authorization", "auth-token"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   credentials: true
