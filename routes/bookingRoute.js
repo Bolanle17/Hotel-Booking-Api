@@ -4,6 +4,9 @@ const bookingController = require('../controllers/bookingController');
 const { auth } = require('../middleware/auth');
 
 
+router.post('/check-room-availability', auth, bookingController.checkRoomAvailability);
+
+
 router.post('/',auth, bookingController.createBooking);
 
 

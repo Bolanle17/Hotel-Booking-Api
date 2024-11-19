@@ -26,6 +26,8 @@ router.delete("/delete", hotelController.deleteHotel);
 
 router.get("/:id", hotelController.getHotelById);
 
+router.get('/name/:name', hotelController.getHotelByName);
+
 router.put("/:id", upload.fields([
   { name: 'img', maxCount: 1 },
   { name: 'gallery', maxCount: 5 }

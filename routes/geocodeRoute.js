@@ -20,6 +20,9 @@ router.get('/geocode', async (req, res) => {
         q: address,
         limit: 1
       },
+      headers: {
+        'User-Agent': 'MOAHOTELS <opeyemi6280@gmail.com> '  // Use a proper user-agent
+      },
     }); 
 
     console.log('Nominatim API response:', response.data);

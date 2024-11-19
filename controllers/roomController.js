@@ -2,7 +2,6 @@ const Room = require("../models/room");
 const Hotel = require("../models/hotel");
 
 
-
 exports.createRoom = async (req, res) => {
   try {
     const { hotelId, roomType, price, description } = req.body;

@@ -90,7 +90,6 @@ exports.deleteHotel = async (req, res) => {
   }
 };
 
-
 exports.updateHotelById = async (req, res) => {
   try {
     const hotelId = req.params.id;
@@ -120,7 +119,7 @@ exports.updateHotelById = async (req, res) => {
     const updatedHotel = await Hotel.findByIdAndUpdate(hotelId, updatedData, { new: true, runValidators: true });
     
     if (!updatedHotel) {
-      return res.json({ success: false, message: "Hotel not found" });
+      return res.status(404).json({ success: false, message: "Hotel not found" });
     }
 
     res.json({ success: true, message: "Hotel updated", data: updatedHotel });
@@ -130,17 +129,20 @@ exports.updateHotelById = async (req, res) => {
   }
 };
 
+
+ 
+
   exports.getHotelById = async (req, res) => {
     const { id } = req.params; 
   
     
     if (!id) {
-      return res.json({ success: false, message: 'Hotel ID is required' });
+      return res.status(400).json({ success: false, message: 'Hotel ID is required' });
     }
   
     
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.json({ success: false, message: 'Invalid hotel ID' });
+      return res.status(400).json({ success: false, message: 'Invalid hotel ID' });
     }
   
     try {
@@ -148,12 +150,38 @@ exports.updateHotelById = async (req, res) => {
       .populate('rooms');
   
       if (!hotel) {
-        return res.json({ success: false, message: 'Hotel not found' });
+        return res.status(404).json({ success: false, message: 'Hotel not found' });
       }
   
-      res.json({ success: true, data: hotel });
+      res.status(200).json({ success: true, data: hotel });
     } catch (error) {
       console.error(error);
-      res.json({ success: false, message: 'Server error' });
+      res.status(500).json({ success: false, message: 'Server error' });
+    }
+  };
+
+  exports.getHotelByName = async (req, res) => {
+    try {
+      const hotelName = req.params.name;
+      
+      const hotel = await Hotel.findOne({ name: hotelName });
+      
+      if (!hotel) {
+        return res.status(404).json({
+          success: false,
+          message: 'Hotel not found'
+        });
+      }
+  
+      return res.status(200).json({
+        success: true,
+        data: hotel
+      });
+    } catch (error) {
+      console.error('Error fetching hotel by name:', error);
+      return res.status(500).json({
+        success: false,
+        message: error.message || 'Error fetching hotel'
+      });
     }
   };
